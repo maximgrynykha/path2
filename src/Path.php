@@ -1,6 +1,6 @@
 <?php
 
-namespace Pathfinder;
+namespace Ismaxim\Pathfinder;
 
 final class Path
 {
