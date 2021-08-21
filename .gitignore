@@ -1,0 +1,5 @@
+# Dirs
+vendor
+
+# Regular files
+composer.lock
