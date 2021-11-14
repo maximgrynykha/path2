@@ -1,5 +1,5 @@
 {
-    "name": "ismaxim/pathfinder",
+    "name": "ismaxim/path2",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -9,10 +9,9 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {},
     "autoload": {
         "psr-4": {
-            "Ismaxim\\Pathfinder\\": "src/"
+            "Ismaxim\\Path2\\": "src/"
         }
     }
 }
