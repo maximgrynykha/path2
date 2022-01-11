@@ -5,6 +5,21 @@ namespace Path2;
 final class Path
 {
     /**
+     * @var string
+     */
+    public readonly string $cwd;
+
+    /**
+     * @param bool|string $cwd
+     *  
+     * @return void 
+     */
+    public function __construct(bool|string $cwd = '')
+    {
+        $this->cwd = ((string) $cwd) ?: (string) getcwd();
+    }
+
+    /**
      * Return correct path to needed place
      * at file system. Based on current OS.
      *
@@ -20,20 +35,19 @@ final class Path
      *
      * @return string
      */
-    public static function to(string $path, string $from = ''): string
+    public function to(string $path, string $from = ''): string
     {
         if (! $path) return $path;
 
-        [$cwd, $path, $from] = [getcwd(), trim($path), trim($from)];
+        [$cwd, $path, $from] = [$this->cwd, trim($path), trim($from)];
 
         if ($from && str_contains($from, $cwd)) {
             $from = substr($from, mb_strpos($from, $cwd) + mb_strlen($cwd));
+            $from = $this->normalize($from);
         }
 
-        $from = (! $from) ? '' : self::normalize($from);
-        $from = self::suffix(sprintf("$cwd%s", $from));
-
-        $path = self::suffix(self::normalize($path));
+        $from = $this->suffix(sprintf("$cwd%s", $from));
+        $path = $this->suffix($this->normalize($path));
 
         return (! str_contains($path, $from)) ? $from . $path : $path;
     }
@@ -46,7 +60,7 @@ final class Path
      *
      * @return string
      */
-    private static function normalize(string $path): string
+    private function normalize(string $path): string
     {
         $path = str_replace(["/", "\\"], DIRECTORY_SEPARATOR, $path);
         $path = preg_replace('#[\\\/]+#', DIRECTORY_SEPARATOR, $path);
@@ -59,9 +73,9 @@ final class Path
      *
      * @return string
      */
-    private static function suffix(string $path): string
+    private function suffix(string $path): string
     {
-        return (self::isDir($path) && ! self::isFile($path))
+        return ($this->isDir($path) && ! $this->isFile($path))
             ? $path . DIRECTORY_SEPARATOR : $path;
     }
 
@@ -72,7 +86,7 @@ final class Path
      *
      * @return bool
      */
-    private static function isFile(string $path): bool
+    private function isFile(string $path): bool
     {
         return (bool) pathinfo($path, PATHINFO_EXTENSION);
     }
@@ -82,8 +96,8 @@ final class Path
      *
      * @return bool
      */
-    private static function isDir(string $path): bool
+    private function isDir(string $path): bool
     {
-        return ! self::isFile($path);
+        return ! $this->isFile($path);
     }
 }
