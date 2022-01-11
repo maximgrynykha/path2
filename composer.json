@@ -1,17 +1,30 @@
 {
-    "name": "ismaxim/path2",
+    "name": "maximgrynykha/path2",
+    "description": "Normalize paths to files & directories in PHP",
     "type": "library",
     "license": "MIT",
+    "keywords": ["php", "file", "files", "dir", "dirs",
+        "directories", "pathfinding", "pathfinder", "filesystem",
+        "normalize", "sanitize", "slashes","path2","path", "trim"
+    ],
+    "homepage": "https://github.com/MaximGrynykha/path2",
     "authors": [
         {
             "name": "Maxim Grynykha",
-            "email": "maximgrynykha@gmail.com"
+            "email": "maximgrynykha@gmail.com",
+            "homepage": "https://github.com/MaximGrynykha"
         }
     ],
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
+    "require": {
+        "php": "^8.0||^8.1"
+    },
+    "require-dev": {
+        "symfony/var-dumper": "^6.0"
+    },
     "autoload": {
         "psr-4": {
-            "Ismaxim\\Path2\\": "src/"
+            "Path2\\": "src/Path2"
         }
     }
 }
