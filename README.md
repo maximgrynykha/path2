@@ -21,8 +21,10 @@ use Path2\Path;
 
 require_once 'vendor/autoload.php';
 
+$path = new Path();
+
 // For example, normalize some kinky path
-$normalized = Path::to('/\/src/\\\Path2/\/\/\Path.php');
+$normalized = $path->to('/\/src/\\\Path2/\/\/\Path.php');
 
 dd($normalized); // "{CWD}/src/Path2/Path.php" (on an UNIX) || "{CWD}\src\Path2\Path.php" (on a Windows)
                  
