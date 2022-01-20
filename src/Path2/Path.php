@@ -2,7 +2,7 @@
 
 namespace Path2;
 
-final class Path
+class Path
 {
     /**
      * Current working directory.
@@ -19,7 +19,7 @@ final class Path
      *
      * @var array
      */
-    private array $cache;
+    protected array $cache;
 
     /**
      * @param false|string $cwd
@@ -125,7 +125,7 @@ final class Path
      *
      * @return string
      */
-    private function normalize(string $path): string
+    protected function normalize(string $path): string
     {
         $path = str_replace(["/", "\\"], DIRECTORY_SEPARATOR, $path);
         $path = preg_replace('#[\\\/]+#', DIRECTORY_SEPARATOR, $path);
@@ -138,7 +138,7 @@ final class Path
      *
      * @return string
      */
-    private function suffix(string $path): string
+    protected function suffix(string $path): string
     {
         return ($this->isDir($path) && ! $this->isFile($path))
             ? $path . DIRECTORY_SEPARATOR : $path;
