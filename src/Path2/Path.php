@@ -11,8 +11,8 @@ final class Path
 
     /**
      * @param bool|string $cwd
-     *  
-     * @return void 
+     *
+     * @return void
      */
     public function __construct(bool|string $cwd = '')
     {
@@ -53,6 +53,46 @@ final class Path
     }
 
     /**
+     * Usage:
+     *
+     * ```php
+     * $path = new Path();
+     *
+     * $kinky_path = '/\/src/\\\Path2/\/\/\Path.php';
+     * $path_type = $path->isFile($kinky_path);
+     * ```
+     *
+     * @param string $path
+     *
+     * @see https://bit.ly/3iWnupn
+     *
+     * @return bool
+     */
+    public function isFile(string $path): bool
+    {
+        return (bool) pathinfo($path, PATHINFO_EXTENSION);
+    }
+
+    /**
+     * Usage:
+     *
+     * ```php
+     * $path = new Path();
+     *
+     * $kinky_path = '/\/src/\\\Path2/\/\/\Path.php';
+     * $path_type = $path->isDir($kinky_path);
+     * ```
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function isDir(string $path): bool
+    {
+        return ! $this->isFile($path);
+    }
+
+    /**
      * Remove excess slashes from the path and replace
      * them with corresponding ones to the current OS.
      *
@@ -77,27 +117,5 @@ final class Path
     {
         return ($this->isDir($path) && ! $this->isFile($path))
             ? $path . DIRECTORY_SEPARATOR : $path;
-    }
-
-    /**
-     * @param string $path
-     *
-     * @see https://bit.ly/3iWnupn
-     *
-     * @return bool
-     */
-    private function isFile(string $path): bool
-    {
-        return (bool) pathinfo($path, PATHINFO_EXTENSION);
-    }
-
-    /**
-     * @param string $path
-     *
-     * @return bool
-     */
-    private function isDir(string $path): bool
-    {
-        return ! $this->isFile($path);
     }
 }
