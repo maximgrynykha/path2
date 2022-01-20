@@ -26,8 +26,10 @@ final class Path
      * Usage:
      *
      * ```php
+     * $path = new Path();
+     *
      * $kinky_path = '/\/src/\\\Path2/\/\/\Path.php';
-     * $normalized = Path::to($kinky_path);
+     * $normalized = $path->to($kinky_path);
      * ```
      *
      * @param string $path any path to the file or dir
