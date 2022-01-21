@@ -17,7 +17,7 @@ class Path
     /**
      * Cache for normalized paths.
      *
-     * @var array
+     * @var string[]
      */
     protected array $cache;
 
